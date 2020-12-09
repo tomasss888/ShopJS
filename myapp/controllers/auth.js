@@ -23,6 +23,13 @@ exports.login = async (req, res) => {
         }
         db.query('SELECT * FROM users WHERE username = ?', [username], async (error,results) => {
             
+            if(results[0] === undefined){
+                res.status(401).render('login', {
+                    message: 'Username or password is incorrect'
+                })
+            }
+            
+
             bcrypt.compare(password, results[0].password, function(err, result) {
                 if (err) { 
                     res.status(401).render('login', {

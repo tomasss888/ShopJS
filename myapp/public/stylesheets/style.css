@@ -376,3 +376,9 @@ input[type=submit]:hover {
 #ProductBox_individual{
   padding: 40px;
 }
+
+#IncorrectData{
+  color: white;
+  background-color: #eb1e1e;
+  border-radius: 5px;
+}

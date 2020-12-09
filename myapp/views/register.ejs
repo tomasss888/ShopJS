@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('partials/head'); %>
+  </head>
+
+
+  <body>
+    <header>
+      <%- include('./partials/header'); %>
+  </header>
+    
+    <div class="middle">
+      <div class="login-page">
+        <div class="form" >
+          <form class="register-form" action="/register" method="POST">
+            <input type="text" id="username" name="username" placeholder="name" 
+            required/>
+            <input type="email" id="email" name="email" placeholder="email address"
+            required/>
+            <input type="password" id="password" name="password" placeholder="password" 
+            required/>
+            <button type="submit" >create</button>
+            <p class="message">Already registered? <a href="/login">Sign In</a></p>
+          </form>
+          
+        </div>
+      </div>
+    </div>
+    <footer>
+      <%- include('./partials/footer'); %>
+  </footer>
+  </body>
+</html>

@@ -21,6 +21,15 @@
             </form>
 
             <% } %>
+
+            <% if (typeof cartCount !== 'undefined') { %>
+
+                <form action="/cart" method="GET">
+                    <input  type="submit" value="Cart: <%=cartCount %>" />
+                </form>
+
+            <% } %>
+
         </div>
         </div> 
               

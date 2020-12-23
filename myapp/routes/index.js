@@ -3,8 +3,10 @@ var router = express.Router();
 
 
 const authController = require('../controllers/auth')
+const productController = require('../controllers/product')
+const cartController = require('../controllers/cart')
 
-/* GET home page. */
+/* GET home page. 
 router.get('/', function(req, res, next) {
 
   if(!req.cookies.jwt ){
@@ -15,6 +17,14 @@ router.get('/', function(req, res, next) {
   }
 
 });
+
+*/
+
+router.get('/', productController.indexProduct)
+router.get('/product/:id', productController.productSpecific)
+router.get('/cart', cartController.createCart)
+router.get('/cart/add/:id', cartController.addToCart)
+router.get('/cart/delete/:id', cartController.delete)
 
 router.get('/login',(req,res)=>{
     res.render('login');
@@ -32,7 +42,7 @@ router.post('/register', authController.register)
 ////
 
 router.get('/indexLogged',(req,res)=>{
-  res.render('index',{name: req.cookies.jwt.username , role : req.cookies.jwt.role})
+  res.redirect('/')
 })
 
 router.get('/logout',(req,res)=>{

@@ -12,73 +12,63 @@
       <div class="middle">
         <h1>Shop</h1>
 
+
+
         <div id="ProductBox">
-          <div id="ProductBox_individual">
-            <image style="width:200px; height:200px"></image>
-            <p>Product name</p>
-            <p>Price: $$</p>
-          </div>
-
-          <div id="ProductBox_individual">
-            <image style="width:200px; height:200px"></image>
-            <p>Product name</p>
-            <p>Price: $$</p>
-          </div>
-
-          <div id="ProductBox_individual">
-            <image style="width:200px; height:200px"></image>
-            <p>Product name</p>
-            <p>Price: $$</p>
-          </div>
-
-          <div id="ProductBox_individual">
-            <image style="width:200px; height:200px"></image>
-            <p>Product name</p>
-            <p>Price: $$</p>
-          </div>
-
-          <div id="ProductBox_individual">
-            <image style="width:200px; height:200px"></image>
-            <p>Product name</p>
-            <p>Price: $$</p>
-          </div>
-
-          <div id="ProductBox_individual">
-            <image style="width:200px; height:200px"></image>
-            <p>Product name</p>
-            <p>Price: $$</p>
-          </div>
-
-          <div id="ProductBox_individual">
-            <image style="width:200px; height:200px"></image>
-            <p>Product name</p>
-            <p>Price: $$</p>
-          </div>
 
 
-          <div id="ProductBox_individual">
-            <image style="width:200px; height:200px"></image>
-            <p>Product name</p>
-            <p>Price: $$</p>
+
+
+
+
+
+
+          <div class="container" style="margin-top:50px;">
+            <div class="row">
+          
+              <% for(var i=0; i<product.length; i++) {%>
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                      <div class="col-item">
+                          <div class="post-img-content">
+                              <img src="http://placehold.it/350x260" class="img-responsive" />
+                              <span class="post-title">
+                                <b><%= product[i].name %></b><br>
+                            </span>
+                              </span>
+                          </div>
+                          <div class="info">
+                              <div class="row">
+                                  <div class="price col-md-6">
+                                      <h3 class="price-text-color"><%= product[i].price %> €</h3>
+                                  </div>
+                                  <div class="rating hidden-sm col-md-6">
+                                      <h3 class="price-text-color">Only <%= product[i].count %> left</h3>
+                                  </div>
+                              </div>
+                              <div class="separator clear-left">
+                                  <p class="btn-details">
+                                      <i class="fa fa-list"></i><a href="/product/<%= product[i].id %>" class="hidden-sm">More details</a></p>
+                              </div>
+                              <div class="clearfix">
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <% } %>
+                      
+            </div>
           </div>
 
-          <div id="ProductBox_individual">
-            <image style="width:200px; height:200px"></image>
-            <p>Product name</p>
-            <p>Price: $$</p>
-          </div>
 
-          <div id="ProductBox_individual">
-            <image style="width:200px; height:200px"></image>
-            <p>Product name</p>
-            <p>Price: $$</p>
-          </div>
+
+
+
+          
+
+         </div>
+
         </div>
 
-
-
-
-      </div>
 
     <footer>
         <%- include('./partials/footer'); %>

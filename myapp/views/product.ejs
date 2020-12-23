@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('partials/head'); %>
+  </head>
+
+
+  <body>
+
+    <header>
+      <%- include('./partials/header'); %>
+  </header>
+    
+
+    <div class="middle">
+
+
+
+
+      
+    
+        <div id="ProductBox_Big">
+
+
+
+          <script src="/stylesheets/product.css"></script>
+
+
+          <section class="mb-5">
+
+            <div class="row">
+              <div class="col-md-6 mb-4 mb-md-0">
+          
+                <div id="mdb-lightbox-ui"></div>
+          
+                <div class="mdb-lightbox">
+          
+                  <div class="row product-gallery mx-1">
+          
+                    <div class="col-12 mb-0">
+                      <image src="http://placehold.it/650x823"></image>
+
+                    </div>
+                    
+                  </div>
+          
+                </div>
+          
+              </div>
+              <div class="col-md-6">
+          
+                <h1><%= product[0].name %></h1>
+                <hr>
+                <h3><span class="mr-1"><strong><%= product[0].price %> €</strong></span></h3>
+
+                <hr>
+                <h5><span class="mr-1"><strong>Only <%= product[0].count %> left in storage</strong></span></h5>
+
+                <hr>
+                <h4><span class="mr-1"><strong>About:</strong></span></h4>
+                <p class="pt-1"><%= product[0].about %></p>
+                
+                <hr>
+                
+
+                <% if (typeof name !== 'undefined') { %>
+
+                    <form action="/cart/add/<%= product[0].id %>" method="GET">
+                        <button class="btn btn-primary btn-md mr-1 mb-2" type="submit">Add to cart
+                    </form>
+                <% } else { %>
+        
+                    <form action="/login" >
+                        <button class="btn btn-primary btn-md mr-1 mb-2" type="submit">login to buy
+                    </form>
+    
+                <% } %>
+
+
+
+
+              </div>
+            </div>
+          
+          </section>
+
+
+
+                
+            
+
+        </div>
+
+        
+    </div>
+
+    <footer>
+      <%- include('./partials/footer'); %>
+  </footer>
+  </body>
+</html>

@@ -106,7 +106,14 @@ a {
   padding: 10px 20px 10px 20px;
   margin: auto 200px;
   text-align: center;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  
+  box-shadow: 0px 2px 5px -1px #000;
+  -moz-box-shadow: 0px 2px 5px -1px #000;
+  -webkit-box-shadow: 0px 2px 5px -1px #000;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 10px;        
+  
 }
 
 .lines_post {
@@ -190,7 +197,12 @@ input[type=submit]:hover {
   background-color: #ffffff;
   padding: 10px;
   text-align: center;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  box-shadow: 0px 2px 5px -1px #000;
+  -moz-box-shadow: 0px 2px 5px -1px #000;
+  -webkit-box-shadow: 0px 2px 5px -1px #000;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 10px;  
   margin: 0px 200px 50px;
   padding: 20px 200px 20px 200px;
 }
@@ -371,6 +383,8 @@ input[type=submit]:hover {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+
+
 }
 
 #ProductBox_individual{
@@ -381,4 +395,18 @@ input[type=submit]:hover {
   color: white;
   background-color: #eb1e1e;
   border-radius: 5px;
+}
+
+#ProductBox_Big{
+  padding: 50px;
+  text-align: left;
+}
+
+#product-big-text-main {
+  font-size: 2.5em;
+  font-style: bold;
+}
+
+#product-big-text-side {
+  font-size: 1.5em;
 }

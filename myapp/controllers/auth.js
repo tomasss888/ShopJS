@@ -26,7 +26,7 @@ exports.login = async (req, res) => {
             if(results[0] === undefined){
                 res.status(401).render('login', {
                     message: 'Username or password is incorrect'
-                })
+                });
             }
             
 
@@ -34,7 +34,12 @@ exports.login = async (req, res) => {
                 if (err) { 
                     res.status(401).render('login', {
                         message: 'Username or password is incorrect'
-                    })
+                    });
+                 }
+                 else{
+                     res.status(401).render('login', {
+                        message: 'Username or password is incorrect'
+                    });
                  }
 
             });

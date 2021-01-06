@@ -19,20 +19,12 @@ exports.createCart = (req, res) => {
 
 
     var cartCount;
-
-    db.query("SELECT * FROM `product_cart` WHERE `user_id` = ?", [req.cookies.jwt.id], function(err,result_cartCount){
-        if(err)
-            throw err;
-        else {
-
-            cartCount = result_cartCount.length
-                //res.render('contacts.ejs', { contacts: result });  
-        }
-    });
+    var currentID = req.cookies.jwt.id;
 
 
 
-    db.query("SELECT * FROM `product_cart` WHERE `user_id` = ?", [req.cookies.jwt.id],function(err,result_product_cart){
+
+    db.query("SELECT * FROM `product_cart` WHERE `user_id` = ?", [currentID],function(err,result_product_cart){
         if(err)
             throw err;
         else {
@@ -47,8 +39,8 @@ exports.createCart = (req, res) => {
             console.log(arrOfVals);
 
             //if empty
-            if(result_product_cart.length == 0){
-                res.render('cart', { title: 'Cart', name: req.cookies.jwt.username , role : req.cookies.jwt.role, cartCount: cartCount});
+            if(arrOfVals.length == 0){
+                res.status(204).render('cart', { title: 'Cart', name: req.cookies.jwt.username , role : req.cookies.jwt.role, cartCount: cartCount});
                 return;
             }
 
@@ -68,7 +60,7 @@ exports.createCart = (req, res) => {
                     sum= parseFloat(sum).toFixed(2);
 
 
-                    res.render('cart', { title: 'Cart', name: req.cookies.jwt.username , role : req.cookies.jwt.role, cartCount: cartCount, cart: result_Product, sum:sum});
+                    res.status(200).render('cart', { title: 'Cart', name: req.cookies.jwt.username , role : req.cookies.jwt.role, cartCount: cartCount, cart: result_Product, sum:sum});
                       
         
 
@@ -85,13 +77,16 @@ exports.createCart = (req, res) => {
 
 exports.addToCart = (req, res) => {
 
+    var currentID =  req.body.currentID;
+
     id = req.params.id;
-    db.query('INSERT INTO `product_cart` SET ?', {product_id: id, user_id: req.cookies.jwt.id}, (error,results) => {
+
+    db.query('INSERT INTO `product_cart` SET ?', {product_id: id, user_id: currentID}, (error,results) => {
         if(error){
             console.log(error);
         }
 
-        res.redirect('/cart');
+        res.status(201).redirect('/');
        
     })
 }
@@ -105,7 +100,7 @@ exports.delete = (req, res) => {
         if(err)
             throw err;
         else {
-            res.redirect('/cart');
+            res.status(200).redirect('/');
         }
     });
 

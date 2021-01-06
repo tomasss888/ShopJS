@@ -1,5 +1,5 @@
 var express = require('express');
-var router = express.Router();
+var router = express();
 
 
 const authController = require('../controllers/auth')
@@ -29,6 +29,8 @@ router.get('/cart/delete/:id', cartController.delete)
 router.get('/login',(req,res)=>{
     res.render('login');
 })
+
+
   
 
 router.post('/login', authController.login)

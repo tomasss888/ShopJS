@@ -16,11 +16,10 @@ const db = mysql.createConnection({
 
 exports.indexProduct = (req, res) => {
 
-
     var cartCount;
-
     if(req.cookies.jwt ){
-    db.query("SELECT * FROM `product_cart` WHERE `user_id` = ?", [req.cookies.jwt.id], function(err,result_cartCount){
+    var currentID = req.cookies.jwt.id;
+    db.query("SELECT * FROM `product_cart` WHERE `user_id` = ?", [currentID], function(err,result_cartCount){
         if(err)
             throw err;
         else {
@@ -31,6 +30,7 @@ exports.indexProduct = (req, res) => {
     });
     }
 
+    
     console.log("Getting post from database...")
     var query = "select * from product";
     db.query(query,function(err,result){
@@ -39,10 +39,10 @@ exports.indexProduct = (req, res) => {
         else {
 
             if(!req.cookies.jwt ){
-                res.render('index', { title: 'index', product: result});
+                res.status(200).render('index', { title: 'index', product: result});
               }
               else{
-                res.render('index', { title: 'index', name: req.cookies.jwt.username , role : req.cookies.jwt.role, product: result, cartCount: cartCount});
+                res.status(200).render('index', { title: 'index', name: req.cookies.jwt.username , role : currentID, product: result, cartCount: cartCount});
               }
 
 
@@ -75,15 +75,15 @@ exports.productSpecific = (req, res) => {
     console.log("Getting post from database...")
 
     db.query("select * from product WHERE `id` = ?", [id] ,function(err,result){
-        if(err)
-            throw err;
+        if(result[0] === undefined)
+            res.status(404).render('product_error');
         else {
 
             if(!req.cookies.jwt ){
-                res.render('product', { title: result.name, product: result});
+                res.status(201).render('product', { title: result.name, product: result});
               }
               else{
-                res.render('product', { title: result.name, name: req.cookies.jwt.username , role : req.cookies.jwt.role, product: result, cartCount: cartCount});
+                res.status(201).render('product', { title: result.name, name: req.cookies.jwt.username , role : req.cookies.jwt.role, product: result, cartCount: cartCount});
               }
               
         }

@@ -24,26 +24,23 @@ exports.login = async (req, res) => {
         db.query('SELECT * FROM users WHERE username = ?', [username], async (error,results) => {
             
             if(results[0] === undefined){
-                res.status(401).render('login', {
-                    message: 'Username or password is incorrect'
+                return res.status(401).render('login', {
+                    message: 'Please type in the password'
                 });
             }
             
 
-            bcrypt.compare(password, results[0].password, function(err, result) {
-                if (err) { 
-                    res.status(401).render('login', {
-                        message: 'Username or password is incorrect'
-                    });
-                 }
-                 else{
-                     res.status(401).render('login', {
-                        message: 'Username or password is incorrect'
-                    });
-                 }
+            const match = await bcrypt.compare(password, results[0].password);
+            if (match) { 
 
-            });
+                
+            } else{
+                return res.status(401).render('login', {
+                    message: 'Username or password is incorrect'
+                });
+            }
 
+           
             if(!results )
             res.status(401).render('login', {
                 message: 'Username or password is incorrect'
@@ -76,13 +73,8 @@ exports.login = async (req, res) => {
 
                 res.cookie('jwt',users , token, cookieOptions );
 
-                if(username == 'admin'){
-                    res.status(200).redirect("/indexLogged");
-                }
-                else{
-                    res.status(200).redirect("/indexLogged");
-                }
-                ;
+                
+                res.status(200).redirect("/indexLogged");
 
             }
         })
@@ -101,13 +93,19 @@ exports.register = (req, res) => {
 
     const {username , email, password} = req.body;
 
+    if(!username || !password || !email) {
+        return res.status(400).render('register', {
+            message: 'Please provide an email, password and username'
+        })
+    }
+
     db.query('SELECT email FROM users WHERE email = ?', [email], async (error, results) => {
         if(error){
             console.log(error);
         }
 
         if(results.length > 0){
-            return res.render('register', {
+            return res.status(401).render('register', {
                 message: 'That email already in use'
             });
         }
@@ -120,7 +118,7 @@ exports.register = (req, res) => {
             }
             else {
                 console.log(results);
-                res.render('register', {
+                res.status(200).render('register', {
                     message: 'User registered'
                 });
             }
